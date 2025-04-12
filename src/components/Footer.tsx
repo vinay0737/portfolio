@@ -1,78 +1,70 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Linkedin, Github, Twitter, ChevronRight, Mail, Heart } from "lucide-react";
+
+// CSS for animations - moved to a separate variable
+const shimmerStyles = `
+  @keyframes shimmer {
+    0% {
+      background-position: -200% 0;
+    }
+    100% {
+      background-position: 200% 0;
+    }
+  }
+  
+  .bg-gradient-shimmer {
+    background: linear-gradient(
+      90deg,
+      rgba(99, 102, 241, 0.1),
+      rgba(168, 85, 247, 0.1),
+      rgba(99, 102, 241, 0.1)
+    );
+    background-size: 200% 100%;
+    animation: shimmer 8s infinite linear;
+  }
+`;
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
   const [isVisible, setIsVisible] = useState(false);
+  const footerRef = useRef<HTMLDivElement>(null);
   
   useEffect(() => {
-    // Add intersection observer for visibility
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setIsVisible(entry.isIntersecting);
-      },
-      { threshold: 0.1 }
-    );
+    // Add the styles to the document head
+    const styleElement = document.createElement('style');
+    styleElement.textContent = shimmerStyles;
+    document.head.appendChild(styleElement);
     
-    const footerElement = document.getElementById("footer");
-    if (footerElement) {
-      observer.observe(footerElement);
+    // Use ref instead of getElementById for better React compatibility
+    if (typeof window !== 'undefined' && 'IntersectionObserver' in window) {
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          setIsVisible(entry.isIntersecting);
+        },
+        { threshold: 0.1 }
+      );
+      
+      if (footerRef.current) {
+        observer.observe(footerRef.current);
+      }
+      
+      return () => {
+        if (footerRef.current) {
+          observer.unobserve(footerRef.current);
+        }
+        document.head.removeChild(styleElement);
+      };
+    } else {
+      // Fallback for environments without IntersectionObserver
+      setIsVisible(true);
+      
+      return () => {
+        document.head.removeChild(styleElement);
+      };
     }
-    
-    // Add keyframe animations
-    const style = document.createElement("style");
-    style.textContent = `
-      @keyframes fadeInUp {
-        from {
-          opacity: 0;
-          transform: translateY(20px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-      
-      @keyframes shimmer {
-        0% {
-          background-position: -200% 0;
-        }
-        100% {
-          background-position: 200% 0;
-        }
-      }
-      
-      .bg-gradient-shimmer {
-        background: linear-gradient(
-          90deg,
-          rgba(99, 102, 241, 0.1),
-          rgba(168, 85, 247, 0.1),
-          rgba(99, 102, 241, 0.1)
-        );
-        background-size: 200% 100%;
-        animation: shimmer 8s infinite linear;
-      }
-      
-      .social-icon-hover {
-        transition: all 0.3s ease;
-      }
-      
-      .social-icon-hover:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
-      }
-    `;
-    document.head.appendChild(style);
-    
-    return () => {
-      if (footerElement) {
-        observer.unobserve(footerElement);
-      }
-      document.head.removeChild(style);
-    };
   }, []);
   
-  const fadeInUpStyle = (delay) => ({
+  const fadeInUpStyle = (delay: number) => ({
     opacity: isVisible ? 1 : 0,
     transform: isVisible ? "translateY(0)" : "translateY(20px)",
     transition: `opacity 0.6s ease, transform 0.6s ease`,
@@ -81,7 +73,7 @@ const Footer = () => {
   
   return (
     <footer 
-      id="footer" 
+      ref={footerRef}
       className="relative bg-gradient-to-b from-slate-900 to-slate-950 text-white py-12 mt-auto"
     >
       {/* Animated background elements */}
@@ -107,7 +99,7 @@ const Footer = () => {
               Quick Links
             </h3>
             <ul className="space-y-2">
-              {["About", "Education", "Experience", "Projects", "Contact"].map((link, index) => (
+              {["About", "Education", "Experience", "Projects", "Contact"].map((link) => (
                 <li 
                   key={link}
                   className="transform transition-all duration-300 hover:translate-x-1"
@@ -165,7 +157,7 @@ const Footer = () => {
                   href={social.url}
                   target="_blank"
                   rel="noreferrer"
-                  className="text-slate-300 hover:text-white flex items-center justify-center w-8 h-8 rounded-full bg-slate-800 border border-slate-700 social-icon-hover"
+                  className="text-slate-300 hover:text-white flex items-center justify-center w-8 h-8 rounded-full bg-slate-800 border border-slate-700 hover:-translate-y-1 hover:shadow-lg transition-all duration-300"
                   aria-label={social.name}
                 >
                   {social.icon}

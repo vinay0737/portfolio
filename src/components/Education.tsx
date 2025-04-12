@@ -228,7 +228,11 @@ export default function Education() {
                       {index === 0 && (
                         <div className="mt-3">
                           <p className="text-gray-400 text-sm">
-                            <span className="text-gray-300 font-medium">Key Courses:</span> {edu.courses.join(", ")}
+                          {edu.courses && (
+  <p className="text-gray-400 text-sm mt-3">
+    <span className="text-gray-300 font-medium">Key Courses:</span> {edu.courses.join(", ")}
+  </p>
+)}
                           </p>
                         </div>
                       )}

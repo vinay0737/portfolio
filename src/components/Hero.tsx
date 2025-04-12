@@ -6,7 +6,7 @@ function useMouseParallax(strength = 20) {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   
   useEffect(() => {
-    const handleMouseMove = (e) => {
+    const handleMouseMove = (e: MouseEvent) => {
       setMousePosition({
         x: (e.clientX / window.innerWidth - 0.5) * strength,
         y: (e.clientY / window.innerHeight - 0.5) * strength
@@ -19,6 +19,7 @@ function useMouseParallax(strength = 20) {
   
   return mousePosition;
 }
+
 
 export default function Hero() {
   const mouseParallax = useMouseParallax(40);
