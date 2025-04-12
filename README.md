@@ -1,4 +1,4 @@
-# 💼 Manas Chandra - Developer Portfolio
+# 💼 Vekkuluri Vinay - Developer Portfolio
 
 This is my personal portfolio website built with **React**, **Vite**, **Tailwind CSS**, and hosted on **Vercel**. It showcases my experience, projects, education, and contact details in a clean, responsive and interactive way.
 
@@ -26,7 +26,7 @@ This is my personal portfolio website built with **React**, **Vite**, **Tailwind
 
 ## 🚀 Live Demo
 
-👉 [View Live Site](https://my-portfolio-git-main-bobbydra13s-projects.vercel.app/)
+👉 [View Live Site](https://portfolio-1v5i.vercel.app/)
 
 ---
 
@@ -34,7 +34,7 @@ This is my personal portfolio website built with **React**, **Vite**, **Tailwind
 
 ```bash
 # Clone the repo
-git clone https://github.com/BobbyDra13/my_portfolio.git
+git clone https://github.com/vinay0737/portfolio.git
 
 cd my_portfolio
 
