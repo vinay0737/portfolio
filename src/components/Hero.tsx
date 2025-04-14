@@ -280,7 +280,7 @@ export default function Hero() {
         transition={{ delay: 2.5, duration: 1 }}
         className="absolute bottom-24 left-1/2 transform -translate-x-1/2 flex space-x-6 text-white/70"
       >
-        {["HyperLedger Fabric", "Mern Stack", "Python", "Azure", "MongoDB"].map((tech, i) => (
+        {["HyperLedger Fabric", "Mern Stack", "Python", "Azure", "AI/ML"].map((tech, i) => (
           <motion.div
             key={i}
             animate={{ y: [0, -10, 0] }}

@@ -83,7 +83,7 @@ export default function About() {
             <motion.div variants={itemVariants} className="mt-8">
               <h3 className="text-lg font-medium text-gray-200 mb-3">Core Expertise</h3>
               <div className="flex flex-wrap gap-3 mb-6">
-                {["TypeScript", "React", "Node.js", "MongoDB", "Next.js", "AWS"].map((skill, index) => (
+                {["JavaScript", "React", "Node.js", "MongoDB", "C++", "Azure","DSA","computer Vision,Machine Learning,HTML,CSS,SQL"].map((skill, index) => (
                   <motion.span
                     key={skill}
                     variants={skillBadgeVariants}
