@@ -19,36 +19,51 @@ interface ContactCardProps {
 
 const ContactCard = ({ icon, label, href, color, delay }: ContactCardProps) => {
   const [isHovered, setIsHovered] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const colorClass = colorMap[color];
+  
+  // Detect if on mobile device
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
   
   return (
     <div
-      className={`transform transition-all duration-500 ease-out flex items-center gap-3 p-4 rounded-lg shadow-lg cursor-pointer ${
+      className={`transform transition-all duration-500 ease-out flex items-center gap-2 sm:gap-3 p-3 sm:p-4 rounded-lg shadow-lg ${
         isHovered ? "scale-105 bg-gray-900" : "bg-gray-800"
-      }`}
+      } ${isMobile ? "active:bg-gray-900 active:scale-105" : "cursor-pointer"}`}
       style={{
         opacity: 1,
         transform: "translate3d(0, 0, 0)",
         transition: `all 0.6s ease ${delay}ms`,
       }}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      onMouseEnter={() => !isMobile && setIsHovered(true)}
+      onMouseLeave={() => !isMobile && setIsHovered(false)}
+      onTouchStart={() => isMobile && setIsHovered(true)}
+      onTouchEnd={() => isMobile && setTimeout(() => setIsHovered(false), 300)}
     >
-      <div className={`${colorClass} flex items-center justify-center`}>
+      <div className={`${colorClass} flex items-center justify-center flex-shrink-0`}>
         {icon}
       </div>
       {href ? (
         <a
           href={href}
-          className={`${colorClass} hover:text-white transition-colors flex items-center gap-1 font-medium`}
+          className={`${colorClass} hover:text-white transition-colors flex items-center gap-1 font-medium text-xs sm:text-sm md:text-base truncate`}
           target="_blank"
           rel="noreferrer"
         >
-          {label}
-          <ExternalLink className="w-3 h-3 opacity-70" />
+          <span className="truncate">{label}</span>
+          <ExternalLink className="w-3 h-3 opacity-70 flex-shrink-0" />
         </a>
       ) : (
-        <span className="text-gray-200 font-medium">{label}</span>
+        <span className="text-gray-200 font-medium text-xs sm:text-sm md:text-base truncate">{label}</span>
       )}
     </div>
   );
@@ -85,49 +100,49 @@ const ProfessionalContact = () => {
   
   const contactItems = [
     {
-      icon: <Mail className="w-5 h-5" />,
+      icon: <Mail className="w-4 h-4 sm:w-5 sm:h-5" />,
       label: "vekkulurivinay9390@gmail.com",
       href: "mailto:vekkulurivinay9390@gmail.com",
       color: "blue-400" as const,
       delay: 100
     },
     {
-      icon: <Phone className="w-5 h-5" />,
+      icon: <Phone className="w-4 h-4 sm:w-5 sm:h-5" />,
       label: "+91 9390910012",
       href: null,
       color: "blue-400" as const,
       delay: 200
     },
     {
-      icon: <Github className="w-5 h-5" />,
+      icon: <Github className="w-4 h-4 sm:w-5 sm:h-5" />,
       label: "GitHub Profile",
       href: "https://github.com/vinay0737",
       color: "blue-400" as const,
       delay: 300
     },
     {
-      icon: <Linkedin className="w-5 h-5" />,
+      icon: <Linkedin className="w-4 h-4 sm:w-5 sm:h-5" />,
       label: "LinkedIn Profile",
       href: "https://www.linkedin.com/in/vekkuluri-vinay-43966328b/",
       color: "blue-400" as const,
       delay: 400
     },
     {
-      icon: <Code className="w-5 h-5" />,
+      icon: <Code className="w-4 h-4 sm:w-5 sm:h-5" />,
       label: "CodeChef Profile",
       href: "https://www.codechef.com/users/vinay53",
       color: "orange-400" as const,
       delay: 500
     },
     {
-      icon: <Server className="w-5 h-5" />,
+      icon: <Server className="w-4 h-4 sm:w-5 sm:h-5" />,
       label: "LeetCode Profile",
       href: "https://leetcode.com/u/vinay9390/",
       color: "yellow-400" as const,
       delay: 600
     },
     {
-      icon: <BookOpen className="w-5 h-5" />,
+      icon: <BookOpen className="w-4 h-4 sm:w-5 sm:h-5" />,
       label: "GeeksforGeeks Profile",
       href: "https://www.geeksforgeeks.org/user/vekkulurivo047/",
       color: "green-400" as const,
@@ -136,32 +151,32 @@ const ProfessionalContact = () => {
   ];
 
   return (
-    <section className="relative px-4 py-16 overflow-hidden">
+    <section className="relative px-3 sm:px-4 py-12 sm:py-16 overflow-hidden">
       {/* Static background with gradient */}
       <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-blue-900 to-gray-900 opacity-90" />
       
       {/* Static decorative elements instead of animated ones */}
-      <div className="absolute top-1/4 left-1/4 w-32 h-32 bg-blue-500 rounded-full filter blur-3xl opacity-10" />
-      <div className="absolute bottom-1/4 right-1/3 w-40 h-40 bg-purple-500 rounded-full filter blur-3xl opacity-10" />
+      <div className="absolute top-1/4 left-1/4 w-24 sm:w-32 h-24 sm:h-32 bg-blue-500 rounded-full filter blur-3xl opacity-10" />
+      <div className="absolute bottom-1/4 right-1/3 w-28 sm:w-40 h-28 sm:h-40 bg-purple-500 rounded-full filter blur-3xl opacity-10" />
       
       <div className="relative max-w-4xl mx-auto">
-        <div className="text-center mb-12">
-          <h2 className="inline-block text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400 mb-4">
+        <div className="text-center mb-8 sm:mb-12">
+          <h2 className="inline-block text-3xl sm:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400 mb-3 sm:mb-4">
             Connect With Me
           </h2>
-          <div className="h-1 w-24 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full" />
+          <div className="h-1 w-16 sm:w-24 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full" />
         </div>
         
-        {/* Staggered reveal using CSS classes instead of dynamic styles */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        {/* Responsive grid layout */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 lg:gap-5">
           {mounted && contactItems.map((item, index) => (
             <ContactCard key={index} {...item} />
           ))}
         </div>
         
         {/* Professional footer */}
-        <div className="mt-12 text-center text-gray-400 opacity-80">
-          <p className="text-sm">© {new Date().getFullYear()} Vekkuluri Vinay. All rights reserved.</p>
+        <div className="mt-8 sm:mt-12 text-center text-gray-400 opacity-80">
+          <p className="text-xs sm:text-sm">© {new Date().getFullYear()} Vekkuluri Vinay. All rights reserved.</p>
         </div>
       </div>
     </section>

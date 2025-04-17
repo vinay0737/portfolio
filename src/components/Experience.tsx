@@ -133,12 +133,12 @@ const Experience = () => {
   };
 
   return (
-    <section className="py-24 px-6 relative overflow-hidden bg-gradient-to-b from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800">
+    <section className="py-12 md:py-24 px-4 md:px-6 relative overflow-hidden bg-gradient-to-b from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800">
       {/* Decorative elements */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-        <div className="absolute -top-20 -right-20 w-64 h-64 bg-purple-200 dark:bg-purple-900/20 rounded-full blur-3xl opacity-40"></div>
-        <div className="absolute top-1/2 -left-32 w-96 h-96 bg-blue-200 dark:bg-blue-900/20 rounded-full blur-3xl opacity-30"></div>
-        <div className="absolute -bottom-20 right-1/4 w-80 h-80 bg-indigo-200 dark:bg-indigo-900/20 rounded-full blur-3xl opacity-30"></div>
+        <div className="absolute -top-20 -right-20 w-40 md:w-64 h-40 md:h-64 bg-purple-200 dark:bg-purple-900/20 rounded-full blur-3xl opacity-40"></div>
+        <div className="absolute top-1/2 -left-20 md:-left-32 w-64 md:w-96 h-64 md:h-96 bg-blue-200 dark:bg-blue-900/20 rounded-full blur-3xl opacity-30"></div>
+        <div className="absolute -bottom-20 right-1/4 w-56 md:w-80 h-56 md:h-80 bg-indigo-200 dark:bg-indigo-900/20 rounded-full blur-3xl opacity-30"></div>
       </div>
 
       <div className="max-w-5xl mx-auto relative z-10">
@@ -146,13 +146,13 @@ const Experience = () => {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="mb-16 text-center"
+          className="mb-10 md:mb-16 text-center"
         >
-          <h2 className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 dark:from-blue-400 dark:via-purple-400 dark:to-indigo-400 inline-block pb-2">
+          <h2 className="text-3xl md:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 dark:from-blue-400 dark:via-purple-400 dark:to-indigo-400 inline-block pb-2">
             Professional Experience
           </h2>
           <div className="h-1 w-20 mx-auto mt-2 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-full"></div>
-          <p className="mt-4 text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+          <p className="mt-4 text-base md:text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
             A journey through my professional roles and achievements, highlighting key projects and technical expertise.
           </p>
         </motion.div>
@@ -162,7 +162,7 @@ const Experience = () => {
           initial="hidden"
           animate="visible"
           variants={containerVariants}
-          className="space-y-8"
+          className="space-y-6 md:space-y-8"
         >
           {experiences.map(({ role, duration, company, logo, color, brief, details, technologies }, i) => (
             <motion.div
@@ -186,31 +186,31 @@ const Experience = () => {
                 onMouseEnter={() => setHoveredExperience(i)}
                 onMouseLeave={() => setHoveredExperience(null)}
               >
-                <div className="p-6 sm:p-8">
+                <div className="p-4 sm:p-6 md:p-8">
                   <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
                     <div className="flex-shrink-0">
                       <div 
-                        className="w-16 h-16 rounded-lg flex items-center justify-center border border-gray-200 dark:border-gray-700"
+                        className="w-12 h-12 sm:w-16 sm:h-16 rounded-lg flex items-center justify-center border border-gray-200 dark:border-gray-700"
                         style={{ backgroundColor: `${color}15` }}
                       >
-                        <img src={logo} alt={company} className="w-10 h-10 object-contain" />
+                        <img src={logo} alt={company} className="w-8 h-8 sm:w-10 sm:h-10 object-contain" />
                       </div>
                     </div>
-                    <div className="flex-grow">
-                      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                        <h3 className="font-bold text-xl sm:text-2xl text-gray-800 dark:text-gray-100 group-hover:text-blue-600">
+                    <div className="flex-grow w-full">
+                      <div className="flex flex-col gap-2">
+                        <h3 className="font-bold text-lg sm:text-xl md:text-2xl text-gray-800 dark:text-gray-100 group-hover:text-blue-600 break-words">
                           {role}
                         </h3>
-                        <div className="flex items-center gap-2">
+                        <div className="flex flex-wrap items-center gap-2">
                           <span 
-                            className="px-3 py-1 rounded-full text-sm font-medium" 
+                            className="px-3 py-1 rounded-full text-xs sm:text-sm font-medium" 
                             style={{ backgroundColor: `${color}15`, color }}
                           >
                             {duration}
                           </span>
                         </div>
                       </div>
-                      <p className="mt-3 text-gray-600 dark:text-gray-300 text-lg">
+                      <p className="mt-3 text-gray-600 dark:text-gray-300 text-sm sm:text-base md:text-lg">
                         {brief}
                       </p>
                     </div>
@@ -224,12 +224,12 @@ const Experience = () => {
                         animate="visible"
                         exit="exit"
                         variants={detailsVariants}
-                        className="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700"
+                        className="mt-5 pt-5 sm:mt-6 sm:pt-6 border-t border-gray-200 dark:border-gray-700"
                       >
-                        <h4 className="font-semibold text-lg text-gray-700 dark:text-gray-200 mb-3">
+                        <h4 className="font-semibold text-base sm:text-lg text-gray-700 dark:text-gray-200 mb-3">
                           Key Achievements
                         </h4>
-                        <ul className="space-y-3">
+                        <ul className="space-y-2 sm:space-y-3">
                           {details.map((detail, j) => (
                             <motion.li 
                               key={j}
@@ -243,13 +243,13 @@ const Experience = () => {
                                   style={{ backgroundColor: color }}
                                 ></div>
                               </div>
-                              <p className="text-gray-600 dark:text-gray-300">{detail}</p>
+                              <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300">{detail}</p>
                             </motion.li>
                           ))}
                         </ul>
 
-                        <div className="mt-6">
-                          <h4 className="font-semibold text-lg text-gray-700 dark:text-gray-200 mb-3">
+                        <div className="mt-5 sm:mt-6">
+                          <h4 className="font-semibold text-base sm:text-lg text-gray-700 dark:text-gray-200 mb-3">
                             Technologies Used
                           </h4>
                           <div className="flex flex-wrap gap-2">
@@ -258,7 +258,7 @@ const Experience = () => {
                                 key={t}
                                 variants={chipVariants}
                                 custom={t}
-                                className="px-3 py-1 rounded-full text-sm font-medium bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200"
+                                className="px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-medium bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200"
                               >
                                 {tech}
                               </motion.span>
@@ -266,7 +266,7 @@ const Experience = () => {
                           </div>
                         </div>
 
-                        <div className="mt-6 flex justify-end">
+                        <div className="mt-5 sm:mt-6 flex justify-end">
                           <motion.button
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
@@ -274,10 +274,10 @@ const Experience = () => {
                               e.stopPropagation();
                               setSelectedExperience(null);
                             }}
-                            className="flex items-center gap-2 px-5 py-2 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+                            className="flex items-center gap-1 sm:gap-2 px-3 sm:px-5 py-1.5 sm:py-2 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors text-sm sm:text-base"
                           >
                             <span>Collapse</span>
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 sm:h-4 sm:w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
                             </svg>
                           </motion.button>
