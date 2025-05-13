@@ -292,7 +292,7 @@ export default function Education() {
                   {/* Date indicator for timeline (visible on larger screens) */}
                   <div className="hidden md:block absolute top-6 text-xs sm:text-sm font-medium text-gray-400">
                     {index % 2 === 0 ? (
-                      <div className="right-full mr-8">{edu.period}</div>
+                      ""
                     ) : (
                       <div className="left-full ml-8">{edu.period}</div>
                     )}

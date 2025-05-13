@@ -145,7 +145,7 @@ export default function Hero() {
           variants={itemVariants}
           className="mb-2 sm:mb-3 inline-block py-1 px-2 sm:px-3 bg-gradient-to-r from-blue-500/20 to-cyan-500/20 rounded-full backdrop-blur-md"
         >
-          <span className="text-xs sm:text-sm font-medium text-blue-200">BlockChain Developer & Data Engineer</span>
+          <span className="text-xs sm:text-sm font-medium text-blue-200">Software Developer & Data Engineer</span>
         </motion.div>
 
         <motion.h1 
@@ -188,7 +188,7 @@ export default function Hero() {
         >
           I'm a passionate{" "}
           <span className="text-cyan-400 font-semibold relative">
-            BlockChain Developer
+          Software Developer
             <motion.span 
               className="absolute bottom-0 left-0 w-full h-0.5 bg-cyan-400"
               animate={{ scaleX: [0, 1], originX: "left" }}
